@@ -34,6 +34,13 @@ class TicTacToe
     return false
   end
 
+  def self.intro_screen
+    puts "Let's play Tic-Tac-Toe!"
+    puts "Player 1: x"
+    puts "Player 2: o"
+    puts "Start? [y/n]"
+  end
+
   def winner_screen
     puts "#{self.current_player} is the winner!"
   end
@@ -43,26 +50,25 @@ class TicTacToe
   end
 end
 
-puts "Let's play Tic-Tac-Toe!"
-puts "Player 1: x"
-puts "Player 2: o"
-puts "Start? [y/n]"
+TicTacToe.intro_screen
 start_ans = gets.chomp
+
 if start_ans.downcase == "y"
   puts "Player 1, enter your name: "
   p1 = gets.chomp
   puts "Player 2, enter your name: "
   p2 = gets.chomp
+
   while start_ans.downcase == "y"
     game = TicTacToe.new(p1, p2)
     puts game.board
 
     for i in 0..8
-        puts "#{game.current_player}, select a position (number)"
-        position = gets.chomp.to_s
-        game.update_board(position)
-        puts game.board
-        break if game.winner
+      puts "#{game.current_player}, select a position (number)"
+      position = gets.chomp.to_s
+      game.update_board(position)
+      puts game.board
+      break if game.winner
     end
 
     game.winner ? game.winner_screen : game.tie_screen
